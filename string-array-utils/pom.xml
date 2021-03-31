@@ -6,17 +6,24 @@
 
   <groupId>com.kth.dd2482.utils</groupId>
   <artifactId>string-array-utils</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.0</version>
 
   <name>string-array-utils</name>
-  <!-- FIXME change it to the project's website -->
-  <url>http://www.example.com</url>
+  <url>https://github.com/Ackuq/maven-gh-deploy</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.7</maven.compiler.source>
     <maven.compiler.target>1.7</maven.compiler.target>
   </properties>
+
+  <licenses>
+    <license>
+      <name>MIT License</name>
+      <url>https://github.com/Ackuq/maven-gh-deploy/blob/main/LICENSE</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
 
   <dependencies>
   </dependencies>
