@@ -9,4 +9,5 @@ An example project that will be used to demonstrate how to deploy a Java project
 3. Create basic utility function code
 4. Get approved by OSSRH
 5. Add distributionManagement, developers, description & scm to pom.xml
-6. Add maven-gpg-plugin, maven-javadoc-plugin and maven-source-plugin in pom.xml
+6. Install gpg for signing
+7. Add maven-gpg-plugin, maven-javadoc-plugin and maven-source-plugin in pom.xml
