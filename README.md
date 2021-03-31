@@ -1,5 +1,7 @@
 # Maven GitHub action deploy
 
+An example project that will be used to demonstrate how to deploy a Java project to Maven and use GitHub actions to update it.
+
 ## Steps taken
 
 1. Create .gitignore
