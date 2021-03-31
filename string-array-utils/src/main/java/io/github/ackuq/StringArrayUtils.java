@@ -1,4 +1,4 @@
-package com.kth.dd2482.utils;
+package io.github.ackuq;
 
 /**
  * A class that provides simple utility functions that can be used on string
