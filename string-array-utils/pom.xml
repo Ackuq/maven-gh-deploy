@@ -10,6 +10,7 @@
 
   <name>string-array-utils</name>
   <url>https://github.com/Ackuq/maven-gh-deploy</url>
+  <description>Simple string array utility library</description>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -25,6 +26,13 @@
     </license>
   </licenses>
 
+  <developers>
+    <developer>
+      <name>Axel Pettersson</name>
+      <email>axel@pettersson.cc</email>
+      <url>https://github.com/Ackuq/</url>
+    </developer>
+  </developers>
 
   <distributionManagement>
     <snapshotRepository>
@@ -36,6 +44,12 @@
       <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
     </repository>
   </distributionManagement>
+
+  <scm>
+    <connection>scm:git:git://github.com/Ackuq/maven-gh-deploy.git</connection>
+    <developerConnection>scm:git:ssh://github.com:Ackuq/maven-gh-deploy.git</developerConnection>
+    <url>https://github.com/Ackuq/maven-gh-deploy</url>
+  </scm>
 
   <dependencies>
   </dependencies>
