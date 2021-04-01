@@ -14,3 +14,4 @@ An example project that will be used to demonstrate how to deploy a Java project
 8. Create a key with gpg, note down the passphrase
 9. Upload gpg key with `gpg --keyserver hkp://pool.sks-keyservers.net --send-keys <KEY>`
 10. Do a release with `mvn clean deploy -P release`
+11. Create secret keys for `OSSRH_GPG_SECRET_KEY`, `OSSRH_GPG_SECRET_KEY_PASSWORD`, `OSSRH_PASSWORD` and `OSSRH_USERNAME`
