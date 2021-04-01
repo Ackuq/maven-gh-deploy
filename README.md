@@ -10,4 +10,7 @@ An example project that will be used to demonstrate how to deploy a Java project
 4. Get approved by OSSRH
 5. Add distributionManagement, developers, description & scm to pom.xml
 6. Install gpg for signing
-7. Add maven-gpg-plugin, maven-javadoc-plugin and maven-source-plugin in pom.xml
+7. Add maven-gpg-plugin, maven-javadoc-plugin, maven-source-plugin and nexus-staging-maven-plugin in pom.xml
+8. Create a key with gpg, note down the passphrase
+9. Upload gpg key with `gpg --keyserver hkp://pool.sks-keyservers.net --send-keys <KEY>`
+10. Do a release with `mvn clean deploy -P release`
