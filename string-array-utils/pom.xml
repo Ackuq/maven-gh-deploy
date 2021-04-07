@@ -32,6 +32,11 @@
       <email>axel@pettersson.cc</email>
       <url>https://github.com/Ackuq/</url>
     </developer>
+    <developer>
+      <name>Felix Seifert</name>
+      <email>mail@felix-seifert.com</email>
+      <url>https://github.com/felix-seifert/</url>
+    </developer>
   </developers>
 
   <distributionManagement>
