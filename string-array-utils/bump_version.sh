@@ -31,9 +31,9 @@ echo "Setting new version: $new_version"
 mvn versions:set -DnewVersion=$new_version
 
 if [[ $PRODUCTION == 'true' ]]; then
-    echo "PROD"
     git add ./pom.xml
     git commit -m "Release: $new_version"
+    git tag $new_version
     git push
     git push --tags
 fi
