@@ -1,36 +1,41 @@
 #!/bin/bash
 
-new_version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+current_version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+
+# Extract major
+major_part="${current_version%.*.*}"
+# Remove major from the version
+rest="${current_version#*.}"
+# Get the minor part from rest
+minor_part="${rest%.*}"
+# Get the patch part from rest
+patch_part="${rest#*.}"
 
 case $1 in
     "MAJOR")
-        # Get and increment major
-        new_major_value=$((${new_version:0:1} + 1))
-        # Replace the 1st value with our new value
-        new_version=$(echo $new_version | sed s/./$new_major_value/1)
+        # Increment major
+        major_part=$(($major_part + 1))
         ;;
     "MINOR")
-        # Get and increment minor
-        new_minor_value=$((${new_version:2:1} + 1))
-        # Replace the 3rd value with our new value
-        new_version=$(echo $new_version | sed s/./$new_minor_value/3)
+        # Increment minor
+        minor_part=$(($minor_part + 1))
         ;;
     "PATCH")
-        # Get and increment patch
-        new_patch_value=$((${new_version:4:1} + 1))
-        # Replace the 5th value with our new value
-        new_version=$(echo $new_version | sed s/./$new_patch_value/5)
+        # Increment patch
+        patch_part=$(($patch_part + 1))
         ;;
     *)
         echo "First argument should be one of 'MAJOR', 'MINOR', or 'PATCH'"
         exit 1
 esac
 
+new_version="$major_part.$minor_part.$patch_part"
+
 echo "Setting new version: $new_version"
 
 mvn versions:set -DnewVersion=$new_version
 
-if [[ $PRODUCTION == 'true' ]]; then
+if [ $CI = true ]; then
     git add ./pom.xml
     git commit -m "Release: $new_version"
     git tag $new_version
