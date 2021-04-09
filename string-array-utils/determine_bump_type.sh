@@ -3,7 +3,7 @@
 # Get the current version
 current_version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
 
-commit_messages=$(git log --pretty=%B 1.0.3...HEAD)
+commit_messages=$(git log --pretty=%B $current_version...HEAD)
 
 if [[ $commit_messages == *"BREAKING CHANGE"* || $commit_messages == *"major("*")"* ]]; then
     echo "Found breaking or major changes, will bump major"
@@ -17,6 +17,6 @@ else
 fi
 
 # On CI, set the output
-if [ $CI = true ]; then
+if [ "$CI" = true ]; then
     echo "::set-output name=bump_type::$type"
 fi

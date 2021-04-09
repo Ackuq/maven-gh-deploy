@@ -35,7 +35,7 @@ echo "Setting new version: $new_version"
 
 mvn versions:set -DnewVersion=$new_version
 
-if [ $CI = true ]; then
+if [ "$CI" = true ]; then
     git add ./pom.xml
     git commit -m "Release: $new_version"
     git tag $new_version
