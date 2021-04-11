@@ -1,0 +1,12 @@
+name: Test import of GPG key
+
+on: workflow_dispatch
+
+jobs:
+  import-gpg-key:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Install GPG secret key
+        run: |
+          echo "${{ secrets.OSSRH_GPG_SECRET_KEY }}" | gpg --batch --import
+          gpg --list-secret-keys --keyid-format LONG
