@@ -17,6 +17,9 @@ An example project that will be used to demonstrate how to deploy a Java project
 4. [GitHub Secrets](#github-secrets)
     - [GPG credentials](#gpg-credentials)
     - [Maven Central credentials](#maven-central-credentials)
+5. [GitHub Actions](#github-actions)
+    - [GPG import test](#gpg-import-test)
+    - [Maven deploy](#maven-deploy)
 
 ## Steps taken
 
@@ -169,3 +172,32 @@ echo "${{ secrets.OSSRH_GPG_SECRET_KEY }}" | gpg --batch --import
 ### Maven Central credentials
 
 Your action will need to access your Maven Central credentials to be able to authenticate against the service when deploying. Simply create a secret called `OSSRH_USERNAME`, which includes your username, and one called `OSSRH_PASSWORD`, which includes your password.
+
+## GitHub Actions
+
+Here we will go through the created GitHub actions.
+
+### GPG import test
+
+This workflow can be found in `.github/workflows/test.yml`. The purpose of this workflow is to verify that GitHub actions can import your GPG secret key correctly. It is manually dispatch which means you can test this when desired through the GitHub UI, simply navigate to it by going to: "Actions" > "Test import of GPG key" and press the "run workflow" button.
+
+```yml
+name: Test import of GPG key
+
+on: workflow_dispatch
+
+jobs:
+    import-gpg-key:
+        runs-on: ubuntu-20.04
+        steps:
+            - name: Install GPG secret key
+              run: |
+                  echo "${{ secrets.OSSRH_GPG_SECRET_KEY }}" | gpg --batch --import
+                  gpg --list-secret-keys --keyid-format LONG
+```
+
+### Maven deploy
+
+<!--
+#TODO: implement and add documentation
+-->
