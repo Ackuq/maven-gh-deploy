@@ -127,12 +127,6 @@ The bump version script can be found in `string-array-utils/bump_version.sh` and
 
 The returned value is used by the main program which bumps the correct part of the version, this will set the new version in the pom.xml. If this is run on CI (e.g. GitHub actions), it will commit and push these changes to the checked out branch.
 
-### Determine bump type
-
-This scripts
-
-When running in the CI it sets the output parameter `bump_type` to the decided type.
-
 ## GitHub Secrets
 
 Before starting with out with our GitHub Actions, we set up the secrets that our actions can use.
