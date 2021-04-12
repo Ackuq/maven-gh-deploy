@@ -6,7 +6,10 @@ jobs:
   update_version:
     runs-on: ubuntu-20.04
     steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
     - name: Get latest version and update based on last commit
+      working-directory: 'string-array-utils'
       run: ./bump_version.sh
   publish:
     needs: update_version
@@ -25,13 +28,13 @@ jobs:
         server-username: MAVEN_USERNAME
         server-password: MAVEN_PASSWORD
     - name: Publish to Maven Central
+      working-directory: 'string-array-utils'
       run: |
         mvn \
           --no-transfer-progress \
           --batch-mode \
           -Dgpg.passphrase=${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }} \
           clean deploy
-      working-directory: 'string-array-utils'
       env:
         MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
         MAVEN_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
