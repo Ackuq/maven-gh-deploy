@@ -2,6 +2,25 @@
 
 current_version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
 
+bump_type=""
+
+determine_bump_version() {
+    commit_messages=$(git log --pretty=%B $current_version...HEAD)
+
+    if [[ $commit_messages == *"BREAKING CHANGE"* || $commit_messages == *"major("*")"* ]]; then
+        echo "Found breaking or major changes, will bump major"
+        bump_type="MAJOR"
+    elif [[ $commit_messages == *"feat("*")"* || $commit_messages == *"minor("*")"* ]]; then
+        echo "Found new features or minor changes, will bump minor"
+        bump_type="MINOR"
+    else
+        echo "No new features or major/minor changes, will bump patch"
+        bump_type="PATCH"
+    fi
+}
+
+determine_bump_version
+
 # Extract major
 major_part="${current_version%.*.*}"
 # Remove major from the version
@@ -11,7 +30,7 @@ minor_part="${rest%.*}"
 # Get the patch part from rest
 patch_part="${rest#*.}"
 
-case $1 in
+case $bump_type in
     "MAJOR")
         # Increment major
         major_part=$(($major_part + 1))
@@ -25,7 +44,7 @@ case $1 in
         patch_part=$(($patch_part + 1))
         ;;
     *)
-        echo "First argument should be one of 'MAJOR', 'MINOR', or 'PATCH'"
+        echo "Could not determine which part to increment"
         exit 1
 esac
 

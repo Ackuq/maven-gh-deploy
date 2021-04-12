@@ -13,7 +13,6 @@ An example project that will be used to demonstrate how to deploy a Java project
     - [Maven Staging Nexus Plugin](#maven-staging-nexus-plugin)
 3. [Bash Scripts](#bash-scripts)
     - [Bump version](#bump-version)
-    - [Determine bump type](#determine-bump-type)
 4. [GitHub Secrets](#github-secrets)
     - [GPG credentials](#gpg-credentials)
     - [Maven Central credentials](#maven-central-credentials)
@@ -124,11 +123,13 @@ These bash scripts contains logic that helps us with semantic versioning when de
 
 ### Bump version
 
-The bump version script can be found in `string-array-utils/bump_version.sh` and has one input, the type of version bump it should do. The input can be one of `"MAJOR"`, `"MINOR"`, or `"PATCH"`, type indicate which semantic version number to change. The type can be generated from running the `determine_bump_type.sh` script.
+The bump version script can be found in `string-array-utils/bump_version.sh` and has no inputs, it first runs a function which determines the part of the version to increment. The function looks through the commit messages between the most recent release and the current `HEAD` of the git history, if it detects at least one of `BREAKING CHANGE` or `major(...)` within one of these messages, if this is true, the function will return `"MAJOR"`. If does not detect a major version change, it can detect a minor version change, which requires at least one git message to have `feat(...)` or `minor(...)` within it, this will return `"MINOR"`. If it does not detect any of the mentioned commit message prefixes, it will return the value `"PATCH"`.
+
+The returned value is used by the main program which bumps the correct part of the version, this will set the new version in the pom.xml. If this is run on CI (e.g. GitHub actions), it will commit and push these changes to the checked out branch.
 
 ### Determine bump type
 
-This scripts looks through the commit messages between the most recent release and the current `HEAD` of the git history, if it detects at least one of `BREAKING CHANGE` or `major(...)` within one of these messages, if this is true, the function will return `"MAJOR"`. If does not detect a major version change, it can detect a minor version change, which requires at least one git message to have `feat(...)` or `minor(...)` within it, this will return `"MINOR"`. If it does not detect any of the mentioned commit message prefixes, it will return the value `"PATCH"`.
+This scripts
 
 When running in the CI it sets the output parameter `bump_type` to the decided type.
 
