@@ -6,7 +6,7 @@
 
   <groupId>io.github.ackuq</groupId>
   <artifactId>string-array-utils</artifactId>
-  <version>1.0.6</version>
+  <version>1.0.4</version>
 
   <name>string-array-utils</name>
   <url>https://github.com/Ackuq/maven-gh-deploy</url>
@@ -57,12 +57,6 @@
   </scm>
 
   <dependencies>
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-api</artifactId>
-      <version>5.7.1</version>
-      <scope>test</scope>
-    </dependency>
 
   </dependencies>
 
