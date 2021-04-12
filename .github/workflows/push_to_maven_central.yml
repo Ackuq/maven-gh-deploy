@@ -8,6 +8,9 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
+      with:
+        # We need all tags and commits to be able to determine new bump type
+        fetch-depth: 0
     - name: Get latest version and update based on last commit
       working-directory: 'string-array-utils'
       run: ./bump_version.sh
