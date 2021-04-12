@@ -3,13 +3,13 @@ name: Upload to Maven Central Repository
 on: workflow_dispatch
 
 jobs:
-  update_version:
+  update-version:
     runs-on: ubuntu-latest
     steps:
     - name: Get latest version and update based on last commit
       run: ./bump_version.sh
   publish:
-      needs: update_version
+      needs: update-version
       runs-on: ubuntu-latest
     steps:
       - name: Install GPG secret key
