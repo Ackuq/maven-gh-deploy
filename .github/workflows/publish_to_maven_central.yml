@@ -1,21 +1,30 @@
-name: Upload to Maven Central Repository
+name: Publish to Maven Central Repository
 
-on: workflow_dispatch
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   publish:
+    name: Bump Maven version, release on GitHub and Maven Central
     runs-on: ubuntu-20.04
+    # Release only if last commit message contains keyword 'PUBLISH' (not case-sensitive)
+    if: "contains(github.event.head_commit.message, 'PUBLISH')"
     steps:
       - name: Install GPG secret key
         run: echo "${{ secrets.OSSRH_GPG_SECRET_KEY }}" | gpg --batch --import
+
       - name: Checkout code
         uses: actions/checkout@v2
         with:
           # We need all tags and commits to be able to determine new bump type
           fetch-depth: 0
+
       - name: Get latest version and update based on previous commits
         working-directory: 'string-array-utils'
         run: ./bump_version.sh
+
       - name: Set up Java with Maven
         uses: actions/setup-java@v2
         with:
@@ -24,6 +33,7 @@ jobs:
           server-id: ossrh
           server-username: MAVEN_USERNAME
           server-password: MAVEN_PASSWORD
+
       - name: Publish to Maven Central
         working-directory: 'string-array-utils'
         run: |
