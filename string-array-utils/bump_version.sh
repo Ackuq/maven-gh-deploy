@@ -1,6 +1,6 @@
 #!/bin/bash
 
-current_version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+current_version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout --no-transfer-progress --batch-mode)
 
 bump_type=""
 
@@ -52,9 +52,12 @@ new_version="$major_part.$minor_part.$patch_part"
 
 echo "Setting new version: $new_version"
 
-mvn versions:set -DnewVersion=$new_version
+mvn versions:set -DnewVersion=$new_version --no-transfer-progress --batch-mode
 
 if [ "$CI" = true ]; then
+    git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+    git config --local user.name "Release bot"
+
     git add ./pom.xml
     git commit -m "Release: $new_version"
     git tag $new_version
