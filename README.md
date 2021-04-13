@@ -176,7 +176,7 @@ jobs:
                   gpg --list-secret-keys --keyid-format LONG
 ```
 
-### Maven deploy
+### Maven Deploy
 
 <!--
 #TODO: implement and add documentation
