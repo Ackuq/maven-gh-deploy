@@ -17,7 +17,7 @@ public class StringArrayUtils {
       for (int i = 0; i < array.length; i++) {
          String value = array[i];
          if (value != null) {
-            result[i] = value.trim();
+            result[i] = value.trim() + " ";
          }
       }
       return result;
