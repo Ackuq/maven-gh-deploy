@@ -322,3 +322,8 @@ profile which we activate here.
 Consult the file [`publish_to_maven_central.yml`](.github/workflows/publish_to_maven_central.yml) to see the whole 
 workflow.
 
+## Copyright and License
+Copyright © 2021, [Axel Pettersson](https://github.com/ackuq) and [Felix Seifert](https://www.felix-seifert.com/)
+
+This demo is published under the short and permissive [MIT license](LICENSE). Basically, you can do whatever you want 
+as long as you include the original copyright and license notice in any copy of the software/source.
