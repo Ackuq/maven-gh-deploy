@@ -34,4 +34,14 @@ public class StringArrayUtilsTest {
 
         assertArrayEquals(expected, actual);
     }
+
+    @Test
+    public void toUpperCaseTest() {
+        String[] testArray = {"abc", " Abc ", "aBc", "ABC", "aBC  ", "A B C", " a b C ", " ", null};
+        String[] expected = {"ABC", " ABC ", "ABC", "ABC", "ABC  ", "A B C", " A B C ", " ", null};
+
+        String[] actual = StringArrayUtils.toUpperCase(testArray);
+
+        assertArrayEquals(expected, actual);
+    }
 }
