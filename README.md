@@ -191,12 +191,8 @@ For deploying our packaged source code on Maven Central, we require two sets of 
 
 Maven Central requires us to sign the deployed package with a GPG key pair. For signing the package, we require the 
 secret key and the passphrase to access the secret key. We then save these details as GitHub secrets. In our case, we 
-used `OSSRH_GPG_SECRET_KEY` ans `OSSRH_GPG_SECRET_KEY_PASSWORD` respectively. [This GitHub gist](https://gist.github.com/sualeh/ae78dc16123899d7942bc38baba5203c?fbclid=IwAR2bTMmf1Qs1UqiwOxQS9vSwIh-pyzPtQTtZJKlNwim6EmCPTRmTzD6kVEw) 
+used `OSSRH_GPG_SECRET_KEY` and `OSSRH_GPG_SECRET_KEY_PASSWORD` respectively. [This GitHub gist](https://gist.github.com/sualeh/ae78dc16123899d7942bc38baba5203c?fbclid=IwAR2bTMmf1Qs1UqiwOxQS9vSwIh-pyzPtQTtZJKlNwim6EmCPTRmTzD6kVEw) 
 might give you an idea on how to retrieve these details.
-
-```bash
-echo "${{ secrets.OSSRH_GPG_SECRET_KEY }}" | gpg --batch --import
-```
 
 ### Maven Central Credentials
 
@@ -263,7 +259,7 @@ Our bash script for bumping the version of the release automatically requires se
 when checking out the code. We then set up Java with the needed credentials to login at Maven Central (the used 
 credential variables are populated later on with values from GitHub secrets). After again caching the dependencies, we 
 install the secret GPG key with `echo "${{ secrets.OSSRH_GPG_SECRET_KEY }}" | gpg --batch --import`; the passphrase for 
-this key is used later on when the key should be encrypted.
+this key is used later on when the key should be decrypted.
 
 ```yml
   publish:
@@ -325,3 +321,4 @@ profile which we activate here.
 
 Consult the file [`publish_to_maven_central.yml`](.github/workflows/publish_to_maven_central.yml) to see the whole 
 workflow.
+
