@@ -42,16 +42,4 @@ public class StringArrayUtils {
               .map(s -> s != null ? s.toLowerCase() : null)
               .toArray(String[]::new);
    }
-
-   /**
-    * Transforms the strings in the array to be uppercase
-    * 
-    * @param array An array of values which should be transformed
-    * @return The resulting array
-    */
-   public static String[] toUpperCase(String[] array) {
-      return Arrays.stream(array)
-              .map(s -> s != null ? s.toUpperCase() : null)
-              .toArray(String[]::new);
-   }
 }
