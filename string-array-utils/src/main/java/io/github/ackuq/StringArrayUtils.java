@@ -51,7 +51,7 @@ public class StringArrayUtils {
     */
    public static String[] toUpperCase(String[] array) {
       return Arrays.stream(array)
-              .map(String::toUpperCase)
+              .map(s -> s != null ? s.toUpperCase() : null)
               .toArray(String[]::new);
    }
 }
