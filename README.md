@@ -201,8 +201,18 @@ To authenticate against Maven Central, you will need the according credentials. 
 
 ## GitHub Actions
 
-With all the previously described steps in place, we can finally implement a GitHub Action which automatically deploys 
-a release of our packaged code to Maven Central.
+With all the previously described steps in place, we can finally implement a workflow with GitHub Actions which 
+automatically deploys a release of our packaged code to Maven Central.
+
+At the beginning of every workflow, we have to mention what triggers its execution. For our use case, we want our 
+workflow to be executed for every push to the branch `main`.
+
+```yml
+on:
+  push:
+    branches:
+      - main
+```
 
 ### Test
 
@@ -243,6 +253,7 @@ project before we finally run the tests with `mvn test`.
         working-directory: 'string-array-utils'
         run: |
           mvn \
+            --no-transfer-progress \
             --batch-mode \
             clean test
 ```
@@ -321,6 +332,18 @@ profile which we activate here.
 
 Consult the file [`publish_to_maven_central.yml`](.github/workflows/publish_to_maven_central.yml) to see the whole 
 workflow.
+
+## Solution
+
+We created a workflow with GitHub Actions which gets triggered on every push to the branch `main`. The first job tests 
+ours source code with different Java versions. This job gets executed only on the keyword `PUBLISH` within the last 
+commit message. 
+
+The second job of the workflow gets only executed if the first job succeeded. It bumps a new version, creates a new 
+release on GitHub and publishes the new version to Maven Central. The published package of our project can be found on 
+Maven Central under the following link: [https://search.maven.org/artifact/io.github.ackuq/string-array-utils](https://search.maven.org/artifact/io.github.ackuq/string-array-utils).
+When trying to publish your own package to Maven Central, you should not expect for it to appear to fast. Usually, it 
+lasts a bit longer until packages appear on Maven Central.
 
 ## Copyright and License
 Copyright © 2021, [Axel Pettersson](https://github.com/ackuq) and [Felix Seifert](https://www.felix-seifert.com/)
