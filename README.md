@@ -1,4 +1,6 @@
 # GitHub Action to Deploy to Maven Central Repository
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Maven Central version](https://img.shields.io/maven-central/v/io.github.ackuq/string-array-utils)](https://search.maven.org/artifact/io.github.ackuq/string-array-utils)
 
 This repository contains an example on how to deploy a Java project to the [Maven Central repository](https://search.maven.org/) 
 with [GitHub actions](https://docs.github.com/en/actions). Furthermore, the workflow is described and shown in a video 
