@@ -3,8 +3,8 @@
 [![Maven Central version](https://img.shields.io/maven-central/v/io.github.ackuq/string-array-utils)](https://search.maven.org/artifact/io.github.ackuq/string-array-utils)
 
 This repository contains an example on how to deploy a Java project to the [Maven Central repository](https://search.maven.org/) 
-with [GitHub actions](https://docs.github.com/en/actions). Furthermore, the workflow is described and shown in a video 
-on YouTube (ADD LINK).
+with [GitHub actions](https://docs.github.com/en/actions). Furthermore, the workflow is described and shown in a [video 
+on YouTube](https://www.youtube.com/watch?v=8tLAKABP5ns).
 
 ## Table of Contents
 
